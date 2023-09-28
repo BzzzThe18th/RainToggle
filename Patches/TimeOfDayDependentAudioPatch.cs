@@ -11,8 +11,7 @@ namespace RainToggle.Patches
     {
         static bool Prefix()
         {
-            if (Plugin.instance.enabled) return false;
-            return true;
+            return false;
         }
     }
 }

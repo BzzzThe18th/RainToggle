@@ -16,34 +16,33 @@ namespace RainToggle
         GameObject rainGOF;
         GameObject rainGOF2;
         GameObject snowGO;
-        public static Plugin instance;
 
         void Start()
         {
-            instance = this;
-        }
-
-        void OnEnable()
-        {
             Events.GameInitialized += OnGameInitialized;
-            HarmonyPatches.ApplyHarmonyPatches();
-            rainGOF.SetActive(false);
-            rainGOF2.SetActive(false);
-            snowGO.SetActive(false);
-        }
-
-        void OnDisable()
-        {
-            rainGOF.SetActive(true);
-            rainGOF2.SetActive(true);
-            snowGO.SetActive(true);
         }
 
         void OnGameInitialized(object sender, EventArgs e)
         {
-            rainGOF = GameObject.Find("Enivronment Objects/Local Objects_Prefab/Forest/WeatherDayNight/rain");
-            rainGOF2 = GameObject.Find("Enivronment Objects/Local Objects_Prefab/Forest/WeatherDayNight/rain/DependentStuff");
-            snowGO = GameObject.Find("Enivronment Objects/Local Objects_Prefab/Mountain/Weather/snow (1)");
+            rainGOF = GameObject.Find("Environment Objects/LocalObjects_Prefab/Forest/Environment/WeatherDayNight/rain");
+            rainGOF2 = GameObject.Find("Environment Objects/LocalObjects_Prefab/Forest/Environment/WeatherDayNight/rain/DependentStuff");
+            snowGO = GameObject.Find("Environment Objects/LocalObjects_Prefab/Mountain/Weather/snow (1)");
+        }
+
+        void OnEnable()
+        {
+            HarmonyPatches.ApplyHarmonyPatches();
+            rainGOF?.SetActive(true);
+            rainGOF2?.SetActive(true);
+            snowGO?.SetActive(true);
+        }
+
+        void OnDisable()
+        {
+            HarmonyPatches.RemoveHarmonyPatches();
+            rainGOF?.SetActive(false);
+            rainGOF2?.SetActive(false);
+            snowGO?.SetActive(false);
         }
     }
 }
